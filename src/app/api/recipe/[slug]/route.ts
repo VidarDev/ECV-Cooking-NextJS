@@ -15,7 +15,7 @@ export async function GET(
       headers,
       next: { revalidate },
     })
-    if (!res.ok) throw new Error(`Error: ${res.status}`)
+    if (!res.ok) throw new Error(`Failed to fetch recipe : ${res.status}`)
     const recipes = await res.json()
     return NextResponse.json(recipes)
   } catch (error) {

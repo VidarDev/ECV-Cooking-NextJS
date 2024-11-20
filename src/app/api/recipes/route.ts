@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 
 import { getApiConfig } from '@/utils/config'
 
-export async function GET(request: Request) {
+export async function GET() {
   const { headers } = getApiConfig()
 
   try {
@@ -10,7 +10,7 @@ export async function GET(request: Request) {
       method: 'GET',
       headers,
     })
-    if (!res.ok) throw new Error(`Error: ${res.status}`)
+    if (!res.ok) throw new Error(`Failed to fetch recipes : ${res.status}`)
     const recipes = await res.json()
     return NextResponse.json(recipes)
   } catch (error) {
