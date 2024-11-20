@@ -5,13 +5,22 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "**.picsum.photos",
-        port: "",
-        search: "",
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        port: '',
+        search: '',
       },
     ],
   },
-};
+  redirects: async () => {
+    return [
+      {
+        source: '/recipe',
+        destination: '/recipes',
+        permanent: true,
+      },
+    ]
+  },
+}
 
-export default nextConfig;
+export default nextConfig
