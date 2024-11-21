@@ -1,4 +1,4 @@
-export const getApiConfig = () => {
+export const apiConfig = () => {
   return {
     headers: {
       'Content-Type': 'application/json',

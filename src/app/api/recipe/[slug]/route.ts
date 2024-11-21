@@ -1,16 +1,17 @@
 import { NextResponse } from 'next/server'
 
-import { getApiConfig } from '@/utils/config'
+import { apiConfig } from '@/config/api'
+import { API_URL } from '@/config/constants'
 
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ slug: string }> },
 ) {
   const slug = (await params).slug
-  const { headers, revalidate } = getApiConfig()
+  const { headers, revalidate } = apiConfig()
 
   try {
-    const res = await fetch(`${process.env.API_URL}/api/recipes/${slug}`, {
+    const res = await fetch(`${API_URL}/api/recipes/${slug}`, {
       method: 'GET',
       headers,
       next: { revalidate },
