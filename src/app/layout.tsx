@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 
 import './globals.scss'
+import { Header } from '@/components/Header'
 
 const reemKufiSans = localFont({
   src: './fonts/Reem-kufi.woff2',
@@ -22,7 +23,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${reemKufiSans.variable} antialiased`}>{children}</body>
+      <body className={`${reemKufiSans.variable} antialiased`}>
+        <Header />
+        {children}
+      </body>
     </html>
   )
 }
