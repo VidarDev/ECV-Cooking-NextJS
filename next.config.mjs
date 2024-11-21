@@ -10,6 +10,12 @@ const nextConfig = {
         port: '',
         search: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'api-gastronogeek.vercel.app',
+        port: '',
+        search: '',
+      },
     ],
   },
   redirects: async () => {
