@@ -1,13 +1,26 @@
+import GSAP from '@/lib/gsap'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 
-import './globals.scss'
 import { Header } from '@/components/Header'
+import PageTransition from '@/utils/PageTransition'
 
-const reemKufiSans = localFont({
-  src: './fonts/Reem-kufi.woff2',
-  variable: '--font-reem-kufi-sans',
-  weight: '400 700',
+import './globals.scss'
+
+const Publicsans = localFont({
+  src: [
+    {
+      path: './fonts/Publicsans-VariableFont_wght.woff2',
+      weight: '100 900',
+      style: 'normal',
+    },
+    {
+      path: './fonts/Publicsans-Italic-VariableFont_wght.woff2',
+      weight: '100 900',
+      style: 'italic',
+    },
+  ],
+  variable: '--font-public-sans',
   display: 'swap',
 })
 
@@ -23,9 +36,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${reemKufiSans.variable} antialiased`}>
-        <Header />
-        {children}
+      <body className={`${Publicsans.variable} antialiased`}>
+        <PageTransition>
+          <GSAP>
+            <Header />
+            {children}
+          </GSAP>
+          <div id="scroll-progress" />
+        </PageTransition>
       </body>
     </html>
   )

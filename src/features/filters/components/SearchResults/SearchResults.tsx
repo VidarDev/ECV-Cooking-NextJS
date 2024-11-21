@@ -1,5 +1,6 @@
-import Link from 'next/link'
 import Image from 'next/image'
+
+import TransitionLink from '@/components/TransitionLink'
 
 import { SearchResultsProps } from './types'
 import { MIN_SEARCH_LENGTH } from '@/config/constants'
@@ -30,7 +31,7 @@ export function SearchResults({
       <ul className="py-2">
         {results.map((recipe) => (
           <li key={recipe.slug}>
-            <Link
+            <TransitionLink
               href={`/recipe/${recipe.slug}`}
               className="flex items-center px-4 py-2 hover:bg-gray-50 transition-colors"
             >
@@ -56,7 +57,7 @@ export function SearchResults({
                   {recipe.category ? recipe.category : ''}
                 </p>
               </div>
-            </Link>
+            </TransitionLink>
           </li>
         ))}
       </ul>

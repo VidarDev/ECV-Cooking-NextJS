@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 
 import {
   Card,
@@ -11,6 +10,7 @@ import {
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import TransitionLink from '@/components/TransitionLink'
 
 import { RecipeGridProps } from './types'
 
@@ -50,7 +50,9 @@ export function RecipeGrid({ recipes }: RecipeGridProps) {
           </CardContent>
           <CardFooter className="flex">
             <Button className="w-full" asChild>
-              <Link href={`/recipe/${recipe.slug}`}>Visite</Link>
+              <TransitionLink href={`/recipe/${recipe.slug}`}>
+                Visite
+              </TransitionLink>
             </Button>
           </CardFooter>
         </Card>

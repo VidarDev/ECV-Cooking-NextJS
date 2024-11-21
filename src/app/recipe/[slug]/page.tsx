@@ -1,6 +1,5 @@
 import { Metadata } from 'next'
 import { Suspense } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 
 import {
@@ -14,6 +13,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import Loading from './loading'
+import TransitionLink from '@/components/TransitionLink'
 
 import { Recipe } from '@/types/recipe'
 import { getRecipeAll, getRecipeBySlug } from '@/services/recipes'
@@ -91,7 +91,7 @@ export default async function RecipePage({
           </CardContent>
           <CardFooter className="flex">
             <Button className="w-full" asChild>
-              <Link href={'/recipe'}>Go Back</Link>
+              <TransitionLink href={'/recipe'}>Go Back</TransitionLink>
             </Button>
           </CardFooter>
         </Card>
