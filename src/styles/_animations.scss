@@ -1,0 +1,13 @@
+// bouncy animation
+.bouncy {
+  animation: bouncy 1.2s cubic-bezier(1, 0, 0, 1) infinite alternate;
+}
+
+@keyframes bouncy {
+  0% {
+    transform: rotate(-10deg) translateY(50%);
+  }
+  100% {
+    transform: rotate(10deg) translateY(50%);
+  }
+}
