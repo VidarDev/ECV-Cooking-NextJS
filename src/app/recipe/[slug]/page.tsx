@@ -16,7 +16,7 @@ import Loading from './loading'
 import TransitionLink from '@/components/TransitionLink'
 
 import { Recipe } from '@/types/recipe'
-import { getRecipeAll, getRecipeBySlug } from '@/services/recipes'
+import { getRecipeAll, getRecipeBySlug } from '@/services/api/recipes'
 
 export async function generateStaticParams() {
   const recipes: Recipe[] = await getRecipeAll()

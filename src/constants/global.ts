@@ -1,2 +1,0 @@
-export const MIN_SEARCH_LENGTH = 2
-export const TRANSITION_DURATION = 1000

@@ -1,6 +1,6 @@
 // src/app/api/search/route.ts
 import { NextResponse } from 'next/server'
-import { getRecipeAll } from '@/services/recipes'
+import { getRecipeAll } from '@/services/api/recipes'
 import { Recipe } from '@/types/recipe'
 
 export async function GET(request: Request) {

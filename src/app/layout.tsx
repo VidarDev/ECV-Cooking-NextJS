@@ -10,12 +10,12 @@ import './globals.scss'
 const Publicsans = localFont({
   src: [
     {
-      path: './fonts/Publicsans-VariableFont_wght.woff2',
+      path: '../assets/fonts/PublicSans.woff2',
       weight: '100 900',
       style: 'normal',
     },
     {
-      path: './fonts/Publicsans-Italic-VariableFont_wght.woff2',
+      path: '../assets/fonts/Publicsans-Italic.woff2',
       weight: '100 900',
       style: 'italic',
     },

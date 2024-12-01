@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
 import { apiConfig } from '@/config/api'
-import { API_URL } from '@/config/constants'
+import { API_URL } from '@/config/env'
 
 export async function GET() {
   const { headers } = apiConfig()

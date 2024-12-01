@@ -6,7 +6,7 @@ import { FilterSidebar } from '@/features/search/components/FilterSidebar'
 import { ActiveFilters } from '@/features/search/components/ActiveFilters'
 import Loading from './loading'
 
-import { getRecipeAll } from '@/services/recipes'
+import { getRecipeAll } from '@/services/api/recipes'
 import { Recipe } from '@/types/recipe'
 
 export const metadata: Metadata = {
