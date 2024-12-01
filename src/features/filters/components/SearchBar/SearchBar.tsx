@@ -3,8 +3,8 @@
 import { useState, useRef, useEffect } from 'react'
 import { Search, Loader2, X } from 'lucide-react'
 
-import { useDebounce } from '@/composables/useDebounce'
-import useOnClickOutside from '@/composables/useOnClickOutside'
+import { useDebounce } from '@/hooks/useDebounce'
+import useOnClickOutside from '@/hooks/useOnClickOutside'
 import { SearchResults } from '@/features/filters/components/SearchResults'
 import { Input } from '@/components/ui/input'
 

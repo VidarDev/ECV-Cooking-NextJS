@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 
-import { PageTransitionStore } from '@/types/store'
+import { PageTransitionStore } from '@/types/stores'
 
 const usePageTransitionStore = create<PageTransitionStore>()(
   devtools(

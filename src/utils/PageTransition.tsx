@@ -16,6 +16,7 @@ export default function PageTransition({ children }: PageTransitionProps) {
   const pathname = usePathname()
   const refPage = useRef(null)
   const refTransition = useRef(null)
+
   const {
     isTransitionActive,
     setIsTransitionActive,
@@ -46,22 +47,22 @@ export default function PageTransition({ children }: PageTransitionProps) {
   }
 
   useGSAP(() => {
-    // Quand je change de route, je joue l'animation d'entrée
-    // et refresh scrolltrigger
+    // When I change routes, I play the entrance animation
+    // and refresh ScrollTrigger
     ScrollTrigger.refresh()
     _hide()
   }, [pathname])
 
   useGSAP(() => {
-    // Code spécifique à la première visite du site
+    // Code specific to the first visit to the site
     if (isFirstLoad) {
       gsap.set(refTransition.current, { opacity: 1 })
     }
   }, [isFirstLoad])
 
   useGSAP(() => {
-    // Chaque fois que isTransitionActive se fait set à true, je joue
-    // l'animation de sortie
+    // Each time isTransitionActive is set to true, I play
+    // the exit animation
     if (isTransitionActive) {
       _show()
     }
@@ -72,7 +73,19 @@ export default function PageTransition({ children }: PageTransitionProps) {
       <div ref={refPage} key={pathname}>
         {children}
       </div>
-      <div ref={refTransition} className="transition">
+      <div
+        ref={refTransition}
+        className="transition"
+        style={{
+          width: '100vw',
+          height: '100vh',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: 'black',
+        }}
+      >
         Fuck
       </div>
     </>

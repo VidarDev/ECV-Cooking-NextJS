@@ -22,17 +22,9 @@ export default function TransitionLink({
   return (
     <Link
       onClick={(e) => {
-        // j'empêche le lien de fonctionner
         e.preventDefault()
-
-        // j'évite de superposer des transitions
-        if (isTransitionActive) return
-
-        // je déclare globalement qu'une transition se lance
-        setIsTransitionActive(true)
-
-        // j'attends un petit temps de sorte à ce que mon animation de sortie
-        // se termine puis je push la nouvelle url dans le router
+        if (isTransitionActive) return // already in transition
+        setIsTransitionActive(true) // start transition
         setTimeout(() => {
           router.push(href)
         }, 900)
