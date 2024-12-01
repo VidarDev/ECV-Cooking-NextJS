@@ -23,7 +23,6 @@ export function SearchBar() {
 
   useEffect(() => {
     const fetchResults = async () => {
-      console.log(debouncedSearch)
       if (debouncedSearch.length < MIN_SEARCH_LENGTH) {
         setResults([])
         return

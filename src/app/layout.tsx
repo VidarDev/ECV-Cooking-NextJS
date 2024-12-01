@@ -6,6 +6,7 @@ import { Header } from '@/components/Header'
 import PageTransition from '@/utils/PageTransition'
 
 import './globals.scss'
+import MouseFollower from '@/lib/CursorFollower'
 
 const Publicsans = localFont({
   src: [
@@ -44,6 +45,7 @@ export default function RootLayout({
           </GSAP>
           <div id="scroll-progress" />
         </PageTransition>
+        <MouseFollower />
       </body>
     </html>
   )

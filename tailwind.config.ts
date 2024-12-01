@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss'
 import defaultTheme from 'tailwindcss/defaultTheme'
+import { DEFAULT_CIPHERS } from 'tls'
 
 const config: Config = {
   darkMode: ['class'],
@@ -61,11 +62,17 @@ const config: Config = {
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))',
         },
+        black: 'hsl(var(--custom-black))',
+        custom: {
+          DEFAULT: 'hsl(var(--custom-primary))',
+          background: 'hsl(var(--custom-primary-background))',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+        custom: '2vw',
       },
     },
   },
