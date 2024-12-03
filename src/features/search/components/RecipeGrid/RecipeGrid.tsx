@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import TransitionLink from '@/components/TransitionLink'
+import TransitionLink from '@/components/Atoms/TransitionLink'
 
 import { RecipeGridProps } from './types'
 

@@ -2,11 +2,12 @@ import GSAP from '@/lib/gsap'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 
-import { Header } from '@/components/Header'
-import PageTransition from '@/utils/PageTransition'
+import Header from '@/components/Organisms/Header'
+import TransitionPage from '@/components/templates/TransitionPage'
 
 import './globals.scss'
 import MouseFollower from '@/lib/CursorFollower'
+import Footer from '@/components/Organisms/Footer'
 
 const Publicsans = localFont({
   src: [
@@ -38,13 +39,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${Publicsans.variable} antialiased`}>
-        <PageTransition>
+        <TransitionPage>
           <GSAP>
             <Header />
             {children}
+            <Footer />
           </GSAP>
           <div id="scroll-progress" />
-        </PageTransition>
+        </TransitionPage>
         <MouseFollower />
       </body>
     </html>

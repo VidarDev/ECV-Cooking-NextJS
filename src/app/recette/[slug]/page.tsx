@@ -13,7 +13,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import Loading from './loading'
-import TransitionLink from '@/components/TransitionLink'
+import TransitionLink from '@/components/Atoms/TransitionLink'
 
 import { Recipe } from '@/types/recipe'
 import { getRecipeAll, getRecipeBySlug } from '@/services/api/recipes'

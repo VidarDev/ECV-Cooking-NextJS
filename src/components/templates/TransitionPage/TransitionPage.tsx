@@ -7,12 +7,9 @@ import { useGSAP } from '@gsap/react'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
 import usePageTransitionStore from '@/stores/usePageTransitionStore'
+import { TransitionPageProps } from './types'
 
-interface PageTransitionProps {
-  children: React.ReactNode
-}
-
-export default function PageTransition({ children }: PageTransitionProps) {
+export default function TransitionPage({ children }: TransitionPageProps) {
   const pathname = usePathname()
   const refPage = useRef(null)
   const refTransition = useRef(null)
@@ -73,21 +70,7 @@ export default function PageTransition({ children }: PageTransitionProps) {
       <div ref={refPage} key={pathname}>
         {children}
       </div>
-      <div
-        ref={refTransition}
-        className="transition"
-        style={{
-          width: '100vw',
-          height: '100vh',
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          backgroundColor: 'black',
-        }}
-      >
-        Fuck
-      </div>
+      <div ref={refTransition} className="transition"></div>
     </>
   )
 }

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import TransitionLink from '@/components/TransitionLink'
+import TransitionLink from '@/components/Atoms/TransitionLink'
 
 import { SearchResultsProps } from './types'
 import { MIN_SEARCH_LENGTH } from '@/config/constants'
