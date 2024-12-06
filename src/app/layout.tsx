@@ -1,14 +1,33 @@
+import GSAP from '@/lib/gsap'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import { Merienda } from 'next/font/google'
+
+import Header from '@/components/Header'
+import TransitionPage from '@/components/TransitionPage'
 
 import './globals.scss'
+import MouseFollower from '@/lib/CursorFollower'
+import CardEffect from '@/features/animationEffect/CardEffect'
 
-const reemKufiSans = localFont({
-  src: './fonts/Reem-kufi.woff2',
-  variable: '--font-reem-kufi-sans',
-  weight: '400 700',
+const publicSans = localFont({
+  src: [
+    {
+      path: '../assets/fonts/PublicSans.woff2',
+      weight: '100 900',
+      style: 'normal',
+    },
+    {
+      path: '../assets/fonts/Publicsans-Italic.woff2',
+      weight: '100 900',
+      style: 'italic',
+    },
+  ],
+  variable: '--font-public-sans',
   display: 'swap',
 })
+
+const merienda = Merienda({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,12 +36,24 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body className={`${reemKufiSans.variable} antialiased`}>{children}</body>
+    <html lang="fr">
+      <body
+        className={`${publicSans.variable} ${merienda.className} antialiased`}
+      >
+        <TransitionPage>
+          <GSAP>
+            <CardEffect target="cards-effect" distanceThreshold={150} />
+            <Header />
+            {children}
+          </GSAP>
+          <div id="scroll-progress" />
+        </TransitionPage>
+        <MouseFollower />
+      </body>
     </html>
   )
 }
