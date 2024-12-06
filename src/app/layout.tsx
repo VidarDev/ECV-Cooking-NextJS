@@ -1,6 +1,5 @@
 import GSAP from '@/lib/gsap'
 import type { Metadata } from 'next'
-import localFont from 'next/font/local'
 import { Merienda } from 'next/font/google'
 
 import Header from '@/components/Header'
@@ -9,23 +8,6 @@ import TransitionPage from '@/components/TransitionPage'
 import './globals.scss'
 import MouseFollower from '@/lib/CursorFollower'
 import CardEffect from '@/features/animationEffect/CardEffect'
-
-const publicSans = localFont({
-  src: [
-    {
-      path: './fonts/PublicSans.woff2',
-      weight: '100 900',
-      style: 'normal',
-    },
-    {
-      path: './fonts/Publicsans-Italic.woff2',
-      weight: '100 900',
-      style: 'italic',
-    },
-  ],
-  variable: '--font-public-sans',
-  display: 'swap',
-})
 
 const merienda = Merienda({ subsets: ['latin'] })
 
@@ -41,9 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body
-        className={`${publicSans.variable} ${merienda.className} antialiased`}
-      >
+      <body className={`${merienda.className} antialiased`}>
         <TransitionPage>
           <GSAP>
             <CardEffect target="cards-effect" distanceThreshold={150} />
