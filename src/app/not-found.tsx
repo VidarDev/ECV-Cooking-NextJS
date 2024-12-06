@@ -1,5 +1,11 @@
 import TransitionLink from '@/components/Atoms/TransitionLink'
 import { Button } from '@/components/ui/button'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: '404 - Page non trouvée',
+  description: '404 - Page non trouvée',
+}
 
 export default function NotFound() {
   return (

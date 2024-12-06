@@ -35,7 +35,7 @@ export default function CardEffect({
     }, 100)
 
     return () => clearInterval(cleanupInterval)
-  }, [])
+  }, [cardLifetime])
 
   useEffect(() => {
     const calculateDistance = (
@@ -129,7 +129,7 @@ export default function CardEffect({
       document.removeEventListener('mouseenter', handleMouseEnter, true)
       document.removeEventListener('mouseleave', handleMouseLeave, true)
     }
-  }, [target, distanceThreshold])
+  }, [target, distanceThreshold, maxCards])
 
   useEffect(() => {
     cards.forEach((card) => {
@@ -182,7 +182,7 @@ export default function CardEffect({
           key={card.id}
           className="fixed pointer-events-none object-cover border-2 border-black rounded-lg"
           style={{
-            position: 'fixed',
+            position: 'absolute',
             left: `${card.x}px`,
             top: `${card.y}px`,
             width: '170px',

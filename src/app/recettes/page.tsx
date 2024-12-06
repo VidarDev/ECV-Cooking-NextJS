@@ -8,6 +8,7 @@ import Loading from './loading'
 
 import { getRecipeAll } from '@/services/api/recipes'
 import { Recipe } from '@/types/recipe'
+import { PageCustomLayout } from '@/components/templates/PageLayout'
 
 export const metadata: Metadata = {
   title: 'Recipes',
@@ -39,30 +40,27 @@ export default async function RecipesPage({ searchParams }: RecipesPageProps) {
   const allLicenses = Array.from(new Set(recipes.map((r) => r.license)))
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <PageCustomLayout>
       <h1 className="text-4xl mb-12 font-semibold text-center md:text-left">
         Toutes nos recettes
       </h1>
 
-      <div className="flex flex-col md:flex-row gap-8">
-        <FilterSidebar
-          types={allTypes}
-          licenses={allLicenses}
-          selectedTypes={selectedTypes}
-          selectedLicenses={selectedLicenses}
-        />
+      <FilterSidebar
+        types={allTypes}
+        licenses={allLicenses}
+        selectedTypes={selectedTypes}
+        selectedLicenses={selectedLicenses}
+        className="absolute md:bottom-[calc(100%-100px)] bottom-[calc(100%-24px)] left-1/2 -translate-x-1/2 md:left-3/4 z-10 rotate-3 min-w-[300px]"
+      />
 
-        <div className="flex-1">
-          <ActiveFilters
-            selectedTypes={selectedTypes}
-            selectedLicenses={selectedLicenses}
-          />
+      <ActiveFilters
+        selectedTypes={selectedTypes}
+        selectedLicenses={selectedLicenses}
+      />
 
-          <Suspense fallback={<Loading />}>
-            <RecipeGrid recipes={filteredRecipes} />
-          </Suspense>
-        </div>
-      </div>
-    </div>
+      <Suspense fallback={<Loading />}>
+        <RecipeGrid recipes={filteredRecipes} />
+      </Suspense>
+    </PageCustomLayout>
   )
 }

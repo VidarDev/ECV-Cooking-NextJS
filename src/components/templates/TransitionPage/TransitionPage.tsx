@@ -71,11 +71,7 @@ export default function TransitionPage({ children }: TransitionPageProps) {
 
   return (
     <>
-      <div
-        ref={refPage}
-        key={pathname}
-        className="md:pt-[72px] pt-0 pb-[48px] md:pb-0"
-      >
+      <div ref={refPage} key={pathname}>
         {children}
       </div>
       <div

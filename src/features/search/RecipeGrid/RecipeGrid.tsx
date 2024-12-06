@@ -21,7 +21,7 @@ export function Loading() {
 
 export function RecipeGrid({ recipes }: RecipeGridProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
       {recipes.map((recipe) => (
         <Card
           className="max-w-92 border-2 border-black flex flex-col"
@@ -51,14 +51,18 @@ export function RecipeGrid({ recipes }: RecipeGridProps) {
             <CardTitle className="p-6 pb-3 font-bold text-xl">
               {recipe.title}
             </CardTitle>
-            <div className="flex items-center space-x-2 px-6">
-              <Flame className="w-4 h-4 text-red-500" />
-              <span>Difficulté: {recipe.difficulty}</span>
-            </div>
-            <div className="flex items-center space-x-2 px-6">
-              <Hourglass className="w-4 h-4 text-custom" />
-              <span>Temps: {recipe.prepTime}</span>
-            </div>
+            {recipe.difficulty && (
+              <div className="flex items-center space-x-2 px-6">
+                <Flame className="w-4 h-4 text-red-500" />
+                <span>Difficulté: {recipe.difficulty}</span>
+              </div>
+            )}
+            {recipe.prepTime && (
+              <div className="flex items-center space-x-2 px-6">
+                <Hourglass className="w-4 h-4 text-custom" />
+                <span>Temps de preparation: {recipe.prepTime}</span>
+              </div>
+            )}
           </CardHeader>
           <CardContent className="h-full mt-6">
             <CardDescription className="line-clamp-3">

@@ -3,4 +3,5 @@ export interface FilterSidebarProps {
   licenses: string[]
   selectedTypes: string[]
   selectedLicenses: string[]
+  className?: string
 }

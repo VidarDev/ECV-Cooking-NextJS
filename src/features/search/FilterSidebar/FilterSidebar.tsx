@@ -4,12 +4,14 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 
 import { Checkbox } from '@/components/ui/checkbox'
 import { FilterSidebarProps } from './types'
+import { cn } from '@/lib/utils'
 
 export function FilterSidebar({
   types,
   licenses,
   selectedTypes,
   selectedLicenses,
+  className,
 }: FilterSidebarProps) {
   const router = useRouter()
   const pathname = usePathname()
@@ -33,8 +35,8 @@ export function FilterSidebar({
   }
 
   return (
-    <aside className="md:w-64  w-full flex-shrink-0">
-      <div className="bg-white rounded-lg shadow p-6 border-2 border-black">
+    <div className={cn('max-w-[90vw] flex-shrink-0', className)}>
+      <div className="bg-white rounded-lg shadow p-6 border-2 border-black justify-between flex gap-6">
         <section className="mb-6">
           <h3 className="font-semibold text-lg text-custom mb-4">Catégories</h3>
           <div className="space-y-3">
@@ -71,6 +73,6 @@ export function FilterSidebar({
           </div>
         </section>
       </div>
-    </aside>
+    </div>
   )
 }
