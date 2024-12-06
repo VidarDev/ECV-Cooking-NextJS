@@ -13,12 +13,12 @@ import CardEffect from '@/features/animationEffect/CardEffect'
 const publicSans = localFont({
   src: [
     {
-      path: '../assets/fonts/PublicSans.woff2',
+      path: './fonts/PublicSans.woff2',
       weight: '100 900',
       style: 'normal',
     },
     {
-      path: '../assets/fonts/Publicsans-Italic.woff2',
+      path: './fonts/Publicsans-Italic.woff2',
       weight: '100 900',
       style: 'italic',
     },
