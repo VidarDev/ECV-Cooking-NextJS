@@ -31,29 +31,44 @@ export function ActiveFilters({
     return null
   }
 
+  const renderFilterButton = (
+    type: 'types' | 'licenses',
+    value: string,
+    bgColor: string,
+    textColor: string,
+    borderColor: string,
+  ) => (
+    <button
+      key={value}
+      onClick={() => removeFilter(type, value)}
+      className={`inline-flex items-center px-3 py-1 rounded-md text-sm font-semibold ${bgColor} ${textColor} border-2 ${borderColor}`}
+    >
+      {value}
+      <X className="ml-2 h-4 w-4" />
+    </button>
+  )
+
   return (
     <div className="mb-6">
       <div className="flex flex-wrap gap-2">
-        {selectedTypes.map((type) => (
-          <button
-            key={type}
-            onClick={() => removeFilter('types', type)}
-            className="inline-flex items-center px-3 py-1 rounded-md text-sm font-semibold bg-blue-100 text border-2 border-blue-800"
-          >
-            {type}
-            <X className="ml-2 h-4 w-4" />
-          </button>
-        ))}
-        {selectedLicenses.map((license) => (
-          <button
-            key={license}
-            onClick={() => removeFilter('licenses', license)}
-            className="inline-flex items-center px-3 py-1 rounded-md text-sm font-semibold bg-green-100 text-green-800  border-2 border-green-800"
-          >
-            {license}
-            <X className="ml-2 h-4 w-4" />
-          </button>
-        ))}
+        {selectedTypes.map((type) =>
+          renderFilterButton(
+            'types',
+            type,
+            'bg-blue-100',
+            'text-blue-800',
+            'border-blue-800',
+          ),
+        )}
+        {selectedLicenses.map((license) =>
+          renderFilterButton(
+            'licenses',
+            license,
+            'bg-green-100',
+            'text-green-800',
+            'border-green-800',
+          ),
+        )}
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useCallback } from 'react'
 import { CardEffectProps, CardProps } from './types'
 import { gsap } from 'gsap'
 import Image from 'next/image'
@@ -26,30 +26,15 @@ export default function CardEffect({
     return () => clearInterval(cleanupInterval)
   }, [cardLifetime])
 
-  useEffect(() => {
-    const cleanupInterval = setInterval(() => {
-      const now = Date.now()
-      setCards((prevCards) =>
-        prevCards.filter((card) => now - card.createdAt < cardLifetime),
-      )
-    }, 100)
-
-    return () => clearInterval(cleanupInterval)
-  }, [cardLifetime])
-
-  useEffect(() => {
-    const calculateDistance = (
-      x1: number,
-      y1: number,
-      x2: number,
-      y2: number,
-    ): number => {
+  const calculateDistance = useCallback(
+    (x1: number, y1: number, x2: number, y2: number): number => {
       return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2))
-    }
+    },
+    [],
+  )
 
-    const findTargetElement = (
-      element: HTMLElement | null,
-    ): HTMLElement | null => {
+  const findTargetElement = useCallback(
+    (element: HTMLElement | null): HTMLElement | null => {
       while (element) {
         if (element.classList && element.classList.contains(target)) {
           return element
@@ -57,9 +42,12 @@ export default function CardEffect({
         element = element.parentElement
       }
       return null
-    }
+    },
+    [target],
+  )
 
-    const createCardsGroup = (x: number, y: number, elementId: string) => {
+  const createCardsGroup = useCallback(
+    (x: number, y: number, elementId: string) => {
       const now = Date.now()
       const newCard: CardProps = {
         x,
@@ -75,9 +63,12 @@ export default function CardEffect({
         const updatedCards = [...prev, newCard]
         return updatedCards.slice(-maxCards)
       })
-    }
+    },
+    [maxCards],
+  )
 
-    const handleMouseMove = (e: MouseEvent) => {
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
       const targetElement = findTargetElement(e.target as HTMLElement)
       if (!targetElement) return
 
@@ -100,22 +91,31 @@ export default function CardEffect({
         createCardsGroup(currentPosition.x, currentPosition.y, elementId)
         lastPositionRef.current = currentPosition
       }
-    }
+    },
+    [calculateDistance, createCardsGroup, distanceThreshold, findTargetElement],
+  )
 
-    const handleMouseEnter = (e: MouseEvent) => {
+  const handleMouseEnter = useCallback(
+    (e: MouseEvent) => {
       const targetElement = findTargetElement(e.target as HTMLElement)
       if (targetElement) {
         lastPositionRef.current = { x: e.clientX, y: e.clientY }
       }
-    }
+    },
+    [findTargetElement],
+  )
 
-    const handleMouseLeave = (e: MouseEvent) => {
+  const handleMouseLeave = useCallback(
+    (e: MouseEvent) => {
       const targetElement = findTargetElement(e.target as HTMLElement)
       if (targetElement) {
         lastPositionRef.current = null
       }
-    }
+    },
+    [findTargetElement],
+  )
 
+  useEffect(() => {
     document.querySelectorAll(`.${target}`).forEach((element, index) => {
       if (!element.id) element.id = `${target}-${index}`
     })
@@ -129,7 +129,7 @@ export default function CardEffect({
       document.removeEventListener('mouseenter', handleMouseEnter, true)
       document.removeEventListener('mouseleave', handleMouseLeave, true)
     }
-  }, [target, distanceThreshold, maxCards])
+  }, [handleMouseMove, handleMouseEnter, handleMouseLeave, target])
 
   useEffect(() => {
     cards.forEach((card) => {

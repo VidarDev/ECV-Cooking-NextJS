@@ -6,18 +6,21 @@ export default function useOnClickOutside(
 ) {
   useEffect(() => {
     const listener = (event: MouseEvent | TouchEvent) => {
-      if (!ref.current || ref.current.contains(event?.target as Node)) {
+      if (!ref.current || ref.current.contains(event.target as Node)) {
         return
       }
       handler(event)
     }
 
-    document.addEventListener('mousedown', listener)
-    document.addEventListener('touchstart', listener)
+    const events = ['mousedown', 'touchstart']
+    events.forEach((event) =>
+      document.addEventListener(event, listener as EventListener),
+    )
 
     return () => {
-      document.removeEventListener('mousedown', listener)
-      document.removeEventListener('touchstart', listener)
+      events.forEach((event) =>
+        document.removeEventListener(event, listener as EventListener),
+      )
     }
   }, [ref, handler])
 }

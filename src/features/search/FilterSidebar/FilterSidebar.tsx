@@ -1,10 +1,41 @@
 'use client'
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
-
 import { Checkbox } from '@/components/ui/checkbox'
 import { FilterSidebarProps } from './types'
 import { cn } from '@/lib/utils'
+
+const FilterSection = ({
+  title,
+  items,
+  selectedItems,
+  updateFilters,
+  filterType,
+}: {
+  title: string
+  items: string[]
+  selectedItems: string[]
+  updateFilters: (type: 'types' | 'licenses', value: string) => void
+  filterType: 'types' | 'licenses'
+}) => (
+  <section className="mb-6">
+    <h3 className="font-semibold text-lg text-custom mb-4">{title}</h3>
+    <div className="space-y-3">
+      {items.map((item) => (
+        <label
+          key={item}
+          className="flex items-center space-x-3 cursor-pointer"
+        >
+          <Checkbox
+            checked={selectedItems.includes(item)}
+            onCheckedChange={() => updateFilters(filterType, item)}
+          />
+          <span className="text-sm">{item}</span>
+        </label>
+      ))}
+    </div>
+  </section>
+)
 
 export function FilterSidebar({
   types,
@@ -37,41 +68,20 @@ export function FilterSidebar({
   return (
     <div className={cn('max-w-[90vw] flex-shrink-0', className)}>
       <div className="bg-white rounded-lg shadow p-6 border-2 border-black justify-between flex gap-6">
-        <section className="mb-6">
-          <h3 className="font-semibold text-lg text-custom mb-4">Catégories</h3>
-          <div className="space-y-3">
-            {types.map((type) => (
-              <label
-                key={type}
-                className="flex items-center space-x-3 cursor-pointer"
-              >
-                <Checkbox
-                  checked={selectedTypes.includes(type)}
-                  onCheckedChange={() => updateFilters('types', type)}
-                />
-                <span className="text-sm">{type}</span>
-              </label>
-            ))}
-          </div>
-        </section>
-
-        <section>
-          <h3 className="font-semibold text-custom text-lg mb-4">Licenses</h3>
-          <div className="space-y-3">
-            {licenses.map((license) => (
-              <label
-                key={license}
-                className="flex items-center space-x-3 cursor-pointer"
-              >
-                <Checkbox
-                  checked={selectedLicenses.includes(license)}
-                  onCheckedChange={() => updateFilters('licenses', license)}
-                />
-                <span className="text-sm">{license}</span>
-              </label>
-            ))}
-          </div>
-        </section>
+        <FilterSection
+          title="Catégories"
+          items={types}
+          selectedItems={selectedTypes}
+          updateFilters={updateFilters}
+          filterType="types"
+        />
+        <FilterSection
+          title="Licenses"
+          items={licenses}
+          selectedItems={selectedLicenses}
+          updateFilters={updateFilters}
+          filterType="licenses"
+        />
       </div>
     </div>
   )

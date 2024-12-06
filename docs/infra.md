@@ -4,7 +4,7 @@ The project leverages Docker containerization for consistent development and dep
 
 ## Environment Setup
 
-Configure your environment variables (`.env.[local|dev|prod]`):
+Configure your infra environment variables (`.env.[local|dev|prod]`):
 
 ```bash
 cp .env .env.local

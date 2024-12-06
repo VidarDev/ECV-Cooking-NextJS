@@ -3,14 +3,14 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import { Merienda } from 'next/font/google'
 
-import Header from '@/components/Organisms/Header'
-import TransitionPage from '@/components/templates/TransitionPage'
+import Header from '@/components/Header'
+import TransitionPage from '@/components/TransitionPage'
 
 import './globals.scss'
 import MouseFollower from '@/lib/CursorFollower'
 import CardEffect from '@/features/animationEffect/CardEffect'
 
-const Publicsans = localFont({
+const publicSans = localFont({
   src: [
     {
       path: '../assets/fonts/PublicSans.woff2',
@@ -26,6 +26,7 @@ const Publicsans = localFont({
   variable: '--font-public-sans',
   display: 'swap',
 })
+
 const merienda = Merienda({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -35,13 +36,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <body
-        className={`${Publicsans.variable} ${merienda.className} antialiased`}
+        className={`${publicSans.variable} ${merienda.className} antialiased`}
       >
         <TransitionPage>
           <GSAP>

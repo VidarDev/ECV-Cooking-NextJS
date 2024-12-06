@@ -9,12 +9,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Label } from '@/components/ui/label'
-import { Ingredient } from '@/types/recipe'
-
-interface IngredientsListProps {
-  ingredients: Ingredient[]
-  defaultPersons: number
-}
+import { IngredientsListProps } from './types'
 
 export default function IngredientsList({
   ingredients,
@@ -24,8 +19,7 @@ export default function IngredientsList({
 
   const calculateQuantity = (quantity: number | null) => {
     if (quantity === null) return ''
-    const ratio = persons / defaultPersons
-    return quantity * ratio
+    return (quantity * persons) / defaultPersons
   }
 
   return (
@@ -42,9 +36,9 @@ export default function IngredientsList({
             <SelectValue placeholder="Personnes" />
           </SelectTrigger>
           <SelectContent>
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-              <SelectItem key={num} value={num.toString()}>
-                {num}
+            {[...Array(8)].map((_, i) => (
+              <SelectItem key={i + 1} value={(i + 1).toString()}>
+                {i + 1}
               </SelectItem>
             ))}
           </SelectContent>
@@ -52,12 +46,12 @@ export default function IngredientsList({
       </div>
 
       <ul className="space-y-2">
-        {ingredients.map((ingredient) => (
-          <li key={ingredient.name} className="flex items-center gap-2">
+        {ingredients.map(({ name, quantity, unit }) => (
+          <li key={name} className="flex items-center gap-2">
             <span className="font-medium">
-              {`${calculateQuantity(ingredient.quantity)} ${ingredient.unit ? ingredient.unit : ''}`}
+              {`${calculateQuantity(quantity)} ${unit || ''}`}
             </span>
-            {ingredient.name}
+            {name}
           </li>
         ))}
       </ul>

@@ -8,17 +8,36 @@ import Loading from './loading'
 
 import { getRecipeAll } from '@/services/api/recipes'
 import { Recipe } from '@/types/recipe'
-import { PageCustomLayout } from '@/components/templates/PageLayout'
+import { PageCustomLayout } from '@/components/PageLayout'
 
 export const metadata: Metadata = {
   title: 'Recipes',
   description: '...',
 }
+
 interface RecipesPageProps {
   searchParams: {
     types?: string
     licenses?: string
   }
+}
+
+const filterRecipes = (
+  recipes: Recipe[],
+  selectedTypes: string[],
+  selectedLicenses: string[],
+) => {
+  return recipes.filter((recipe) => {
+    const matchesTypes =
+      selectedTypes.length === 0 || selectedTypes.includes(recipe.type)
+    const matchesLicense =
+      selectedLicenses.length === 0 || selectedLicenses.includes(recipe.license)
+    return matchesTypes && matchesLicense
+  })
+}
+
+const getUniqueValues = (recipes: Recipe[], key: keyof Recipe): string[] => {
+  return Array.from(new Set(recipes.map((recipe) => String(recipe[key]))))
 }
 
 export default async function RecipesPage({ searchParams }: RecipesPageProps) {
@@ -27,17 +46,13 @@ export default async function RecipesPage({ searchParams }: RecipesPageProps) {
   const selectedTypes = searchParams.types?.split(',') || []
   const selectedLicenses = searchParams.licenses?.split(',') || []
 
-  const filteredRecipes = recipes.filter((recipe) => {
-    const matchesTypes =
-      selectedTypes.length === 0 || selectedTypes.includes(recipe.type)
-    const matchesLicense =
-      selectedLicenses.length === 0 || selectedLicenses.includes(recipe.license)
-    return matchesTypes && matchesLicense
-  })
-
-  // Get unique types and licenses for filters
-  const allTypes = Array.from(new Set(recipes.flatMap((r) => r.type)))
-  const allLicenses = Array.from(new Set(recipes.map((r) => r.license)))
+  const filteredRecipes = filterRecipes(
+    recipes,
+    selectedTypes,
+    selectedLicenses,
+  )
+  const allTypes = getUniqueValues(recipes, 'type')
+  const allLicenses = getUniqueValues(recipes, 'license')
 
   return (
     <PageCustomLayout>

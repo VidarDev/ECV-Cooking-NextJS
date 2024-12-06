@@ -6,18 +6,33 @@ interface PageLayoutProps {
   className?: string
 }
 
+const BaseLayout = ({
+  children,
+  className,
+  additionalClasses,
+  ...props
+}: PageLayoutProps & { additionalClasses: string }) => (
+  <main
+    className={cn('flex flex-col min-h-screen', additionalClasses, className)}
+    {...props}
+  >
+    {children}
+  </main>
+)
+
 export function PageDefaultLayout({
   children,
   className = '',
   ...props
 }: PageLayoutProps) {
   return (
-    <main
-      className={cn('flex flex-col min-h-screen pt-0 pb-[48px]', className)}
+    <BaseLayout
+      className={className}
+      additionalClasses="pt-0 pb-[48px]"
       {...props}
     >
       {children}
-    </main>
+    </BaseLayout>
   )
 }
 
@@ -27,8 +42,9 @@ export function PageCustomLayout({
   ...props
 }: PageLayoutProps) {
   return (
-    <main
-      className={cn('flex flex-col min-h-screen cards-effect z-20', className)}
+    <BaseLayout
+      className={className}
+      additionalClasses="cards-effect z-20"
       {...props}
     >
       <div className="relative h-[60vh] min-h-[300px]">
@@ -39,6 +55,6 @@ export function PageCustomLayout({
           {children}
         </div>
       </div>
-    </main>
+    </BaseLayout>
   )
 }
