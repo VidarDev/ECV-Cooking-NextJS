@@ -19,6 +19,7 @@ const config: Config = {
           'var(--font-public-sans)',
           ...defaultTheme.fontFamily.sans,
         ],
+        merienda: ['var(--font-merienda)', ...defaultTheme.fontFamily.serif],
       },
       colors: {
         background: 'hsl(var(--background))',

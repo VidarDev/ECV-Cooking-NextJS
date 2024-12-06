@@ -33,10 +33,10 @@ export function FilterSidebar({
   }
 
   return (
-    <aside className="w-64 flex-shrink-0">
-      <div className="bg-white rounded-lg shadow p-6">
+    <aside className="md:w-64  w-full flex-shrink-0">
+      <div className="bg-white rounded-lg shadow p-6 border-2 border-black">
         <section className="mb-6">
-          <h3 className="font-semibold text-lg mb-4">Catégories</h3>
+          <h3 className="font-semibold text-lg text-custom mb-4">Catégories</h3>
           <div className="space-y-3">
             {types.map((type) => (
               <label
@@ -54,7 +54,7 @@ export function FilterSidebar({
         </section>
 
         <section>
-          <h3 className="font-semibold text-lg mb-4">Licenses</h3>
+          <h3 className="font-semibold text-custom text-lg mb-4">Licenses</h3>
           <div className="space-y-3">
             {licenses.map((license) => (
               <label

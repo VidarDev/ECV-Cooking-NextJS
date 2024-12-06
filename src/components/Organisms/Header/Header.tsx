@@ -1,4 +1,4 @@
-import { SearchBar } from '@/features/filters/components/SearchBar'
+import { SearchBar } from '@/features/filters/SearchBar'
 import Logo from '@/components/Atoms/Logo'
 
 import styles from './header.module.scss'
@@ -11,8 +11,8 @@ export default function Header() {
     >
       <nav className={`${styles.container} flex justify-between items-center`}>
         <Logo />
-        <SearchBar />
         <NavMenu />
+        <SearchBar />
       </nav>
     </header>
   )

@@ -25,7 +25,7 @@ export default function TransitionLink({
         setIsTransitionActive(true) // start transition
         setTimeout(() => {
           router.push(href)
-        }, TRANSITION_DURATION / 2)
+        }, TRANSITION_DURATION + 100)
       }}
       href={href}
       {...props}

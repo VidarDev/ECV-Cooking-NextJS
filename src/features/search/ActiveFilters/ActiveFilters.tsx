@@ -38,7 +38,7 @@ export function ActiveFilters({
           <button
             key={type}
             onClick={() => removeFilter('types', type)}
-            className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-800"
+            className="inline-flex items-center px-3 py-1 rounded-md text-sm font-semibold bg-blue-100 text border-2 border-blue-800"
           >
             {type}
             <X className="ml-2 h-4 w-4" />
@@ -48,7 +48,7 @@ export function ActiveFilters({
           <button
             key={license}
             onClick={() => removeFilter('licenses', license)}
-            className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-100 text-green-800"
+            className="inline-flex items-center px-3 py-1 rounded-md text-sm font-semibold bg-green-100 text-green-800  border-2 border-green-800"
           >
             {license}
             <X className="ml-2 h-4 w-4" />

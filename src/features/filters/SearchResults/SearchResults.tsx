@@ -32,7 +32,7 @@ export function SearchResults({
         {results.map((recipe) => (
           <li key={recipe.slug}>
             <TransitionLink
-              href={`/recipe/${recipe.slug}`}
+              href={`/recette/${recipe.slug}`}
               className="flex items-center px-4 py-2 hover:bg-gray-50 transition-colors"
             >
               <div className="relative h-12 w-12 rounded-md overflow-hidden">
@@ -49,7 +49,7 @@ export function SearchResults({
                 />
               </div>
               <div className="ml-3">
-                <h4 className="text-sm font-medium text-gray-900">
+                <h4 className="text-sm font-semibold text-gray-900">
                   {recipe.title}
                 </h4>
                 <p className="text-sm text-gray-500">
@@ -65,7 +65,7 @@ export function SearchResults({
   }
 
   return (
-    <div className="absolute top-full mt-2 w-full bg-white rounded-lg shadow-lg border border-gray-200 max-h-96 overflow-y-auto z-50">
+    <div className="absolute md:top-full md:bottom-auto bottom-full left-1/2 -translate-x-1/2 my-2 w-full bg-white rounded-xl shadow-lg border-2 border-black max-h-96 overflow-y-auto z-50">
       {renderResults()}
     </div>
   )

@@ -1,3 +1,3 @@
 export default function Loading() {
-  return <div>Loading single recipe...</div>
+  return <div>Chargement de la recette...</div>
 }

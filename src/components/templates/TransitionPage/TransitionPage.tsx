@@ -22,12 +22,14 @@ export default function TransitionPage({ children }: TransitionPageProps) {
   } = usePageTransitionStore()
 
   const _hide = () => {
-    gsap.to(refTransition.current, {
-      opacity: 0,
-      duration: 0.6,
-      delay: isFirstLoad ? 0.3 : 0,
+    const tl = gsap.timeline()
+
+    tl.set(refTransition.current, {
+      xPercent: -100,
+    }).to(refTransition.current, {
+      duration: 1.2,
+      ease: 'power2.inOut',
       onComplete: () => {
-        gsap.set(refTransition.current, { visibility: 'hidden' })
         setIsFirstLoad(false)
         setIsTransitionActive(false)
       },
@@ -35,11 +37,13 @@ export default function TransitionPage({ children }: TransitionPageProps) {
   }
 
   const _show = () => {
-    gsap.set(refTransition.current, { visibility: 'visible', opacity: 0 })
+    const tl = gsap.timeline()
 
-    gsap.to(refTransition.current, {
-      opacity: 1,
-      duration: 0.6,
+    tl.set(refTransition.current, {
+      xPercent: 0,
+    }).to(refTransition.current, {
+      duration: 1.2,
+      ease: 'power2.inOut',
     })
   }
 
@@ -67,10 +71,18 @@ export default function TransitionPage({ children }: TransitionPageProps) {
 
   return (
     <>
-      <div ref={refPage} key={pathname}>
+      <div
+        ref={refPage}
+        key={pathname}
+        className="md:pt-[72px] pt-0 pb-[48px] md:pb-0"
+      >
         {children}
       </div>
-      <div ref={refTransition} className="transition"></div>
+      <div
+        ref={refTransition}
+        className="transition w-screen fixed h-screen bg-black top-0 left-0"
+        style={{ zIndex: 200 }}
+      ></div>
     </>
   )
 }

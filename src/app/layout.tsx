@@ -1,13 +1,14 @@
 import GSAP from '@/lib/gsap'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import { Merienda } from 'next/font/google'
 
 import Header from '@/components/Organisms/Header'
 import TransitionPage from '@/components/templates/TransitionPage'
 
 import './globals.scss'
 import MouseFollower from '@/lib/CursorFollower'
-import Footer from '@/components/Organisms/Footer'
+import CardEffect from '@/features/animationEffect/CardEffect'
 
 const Publicsans = localFont({
   src: [
@@ -25,6 +26,7 @@ const Publicsans = localFont({
   variable: '--font-public-sans',
   display: 'swap',
 })
+const merienda = Merienda({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -38,12 +40,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${Publicsans.variable} antialiased`}>
+      <body
+        className={`${Publicsans.variable} ${merienda.className} antialiased`}
+      >
         <TransitionPage>
           <GSAP>
+            <CardEffect target="cards-effect" distanceThreshold={150} />
             <Header />
             {children}
-            <Footer />
           </GSAP>
           <div id="scroll-progress" />
         </TransitionPage>

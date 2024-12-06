@@ -5,7 +5,7 @@ import { Search, Loader2, X } from 'lucide-react'
 
 import { useDebounce } from '@/hooks/useDebounce'
 import useOnClickOutside from '@/hooks/useOnClickOutside'
-import { SearchResults } from '@/features/filters/components/SearchResults'
+import { SearchResults } from '@/features/filters/SearchResults'
 import { Input } from '@/components/ui/input'
 
 import { Recipe } from '@/types/recipe'
@@ -45,41 +45,43 @@ export function SearchBar() {
   }, [debouncedSearch])
 
   return (
-    <div ref={containerRef} className="relative w-full max-w-xl">
-      <div className="relative">
-        <Input
-          type="text"
-          value={search}
-          placeholder="Rechercher une recette..."
-          onChange={(e) => setSearch(e.target.value)}
-          className="px-10"
-        />
-        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <Search className="h-5 w-5 text-gray-400" />
-        </div>
-        {isLoading ? (
-          <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-            <Loader2 className="h-5 w-5 text-gray-400 animate-spin" />
+    <>
+      <div className="relative w-full max-w-60">
+        <div className="relative">
+          <Input
+            type="text"
+            value={search}
+            placeholder="Rechercher une recette..."
+            onChange={(e) => setSearch(e.target.value)}
+            className="text-xs px-10 md:py-6 rounded-full bg-custom-background font-semibold"
+          />
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <Search className="h-5 w-5 text-black" />
           </div>
-        ) : (
-          search && (
-            <button
-              onClick={() => setSearch('')}
-              className="absolute inset-y-0 right-0 pr-3 flex items-center"
-            >
-              <X className="h-5 w-5 text-gray-400 hover:text-gray-600" />
-            </button>
-          )
-        )}
+          {isLoading ? (
+            <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+              <Loader2 className="h-5 w-5 text-gray-400 animate-spin" />
+            </div>
+          ) : (
+            search && (
+              <button
+                onClick={() => setSearch('')}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center"
+              >
+                <X className="h-5 w-5 text-red-500 hover:text-red-700" />
+              </button>
+            )
+          )}
+        </div>
       </div>
-
       {isOpen && (results.length > 0 || debouncedSearch.length >= 2) && (
         <SearchResults
+          ref={containerRef}
           results={results}
           isLoading={isLoading}
           query={debouncedSearch}
         />
       )}
-    </div>
+    </>
   )
 }
